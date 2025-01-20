@@ -4,5 +4,5 @@
   "description": "Allows players to chat globally throughout hypixel or minecraft",
   "version": "1.0.0",
   "entry": "src/index.js",
-  "requires": ["WebSocket"]
+  "requires": ["Vigilance", "WebSocket"]
 }
