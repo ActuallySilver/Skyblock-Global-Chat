@@ -1,4 +1,9 @@
 import { connection } from "./serverConnection";
+import settings from "./settings";
+
+register("command", () => {
+  settings.openGUI();
+}).setName("globalchat");
 
 register("messageSent", (message, event) => {
   if (message.startsWith("/")) return;
