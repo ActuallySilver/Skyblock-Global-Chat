@@ -61,9 +61,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Backend.csproj",
-      "projectName": "Backend",
-      "projectPath": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Backend.csproj",
+      "projectUniqueName": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Host.csproj",
+      "projectName": "Host",
+      "projectPath": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Host.csproj",
       "packagesPath": "C:\\Users\\Jason\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\obj\\",
       "projectStyle": "PackageReference",

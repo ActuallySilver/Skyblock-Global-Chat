@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Jcrn9qndfNQ=",
+  "dgSpecHash": "4UjPudJoOho=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Backend.csproj",
+  "projectFilePath": "C:\\Users\\Jason\\Desktop\\Coding\\Skyblock-Global-Chat\\Backend\\Host\\Host.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jason\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
