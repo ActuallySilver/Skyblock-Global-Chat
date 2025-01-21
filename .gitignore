@@ -5,3 +5,4 @@ Build/
 Debug/
 
 /Backend/Host/obj
+*.sln
