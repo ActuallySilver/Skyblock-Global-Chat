@@ -1,5 +1,5 @@
 import { connection } from "./serverConnection";
-import { ChatPrefix, RED, YELLOW, GOLD, RESET } from "./utils/constants";
+import { ChatPrefix, RED, YELLOW, GOLD, RESET, GREEN } from "./utils/constants";
 import settings from "./settings";
 
 let globalChatEnabled = false;
@@ -11,18 +11,22 @@ register("command", (...args) => {
   }
   const message = args.join(" ");
 
-  const payload = {
+  const messageData = {
     User: Player.getName(),
     Text: message
   };
-  connection.send(JSON.stringify(payload));
+  connection.send(JSON.stringify(messageData));
 }).setName("globalchat");
 
 register("command", (...args) => {
   if (!args) return;
+  if (!args[0]) {
+    settings.openGUI();
+    return;
+  }
 
-  const sub = (args[0] || "").toLowerCase();
-  switch (sub) {
+  const subCommand = (args[0] || "").toLowerCase();
+  switch (subCommand) {
     case "settings":
       settings.openGUI();
       break;
@@ -33,50 +37,40 @@ register("command", (...args) => {
       connection.close();
       ChatLib.chat(`${ChatPrefix} ${RED}Disconnected. Auto-reconnect disabled.${RESET}`);
       break;
+    case "toggle":
+      globalChatEnabled = !globalChatEnabled;
+      const globalChatEnabledStatus = globalChatEnabled ? `${GREEN}Enabled${RESET}` : `${RED}Disabled${RESET}`;
+
+      ChatLib.chat(`${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${globalChatEnabledStatus}`);
+      break;
     case "help":
       ChatLib.chat(`${ChatPrefix}`);
-      ChatLib.chat(`${YELLOW}/global connect§r - Connect to server${RESET}`);
-      ChatLib.chat(`${YELLOW}/global disconnect§r - Disconnect from server${RESET}`);
-      ChatLib.chat(`${YELLOW}/globalchat [msg]§r - Send message to global chat${RESET}`);
-      ChatLib.chat(`${YELLOW}/chat global§r - Toggle auto-send to global${RESET}`);
+      ChatLib.chat(`${YELLOW}/global connect - Connect to server${RESET}`);
+      ChatLib.chat(`${YELLOW}/global disconnect - Disconnect from server${RESET}`);
+      ChatLib.chat(`${YELLOW}/global toggle - Toggle auto-send to global${RESET}`);
+      ChatLib.chat(`${YELLOW}/globalchat [msg] - Send message to global chat${RESET}`);
       break;
     default:
       ChatLib.chat(`${ChatPrefix} ${RED}Unknown subcommand. Try /global help${RESET}`);
   }
 }).setName("global");
 
-register("command", (...args) => {
-  if (args.length > 0) {
-    if (args[0].toLowerCase() !== "global") {
-      ChatLib.chat(`${ChatPrefix} ${RED}Usage: /chat global${RESET}`);
-      return;
-    }
-  }
-  globalChatEnabled = !globalChatEnabled;
-
-  ChatLib.chat(
-    `${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${
-      globalChatEnabled ? "§aEnabled§r" : "§cDisabled§r"
-    }`
-  );
-}).setName("chat");
-
 register("messageSent", (message, event) => {
   if (message.startsWith("/")) return;
 
   if (globalChatEnabled) {
-    const payload = {
+    const messageData = {
       User: Player.getName(),
       Text: message
     };
-    connection.send(JSON.stringify(payload));
+    connection.send(JSON.stringify(messageData));
 
     event.setCancelled(true);
   }
 });
 
 register("gameLoad", () => {
-  if (!World.isLoaded()) return;
+  //if (!World.isLoaded()) return;
   if (!settings.enableAutoconnect) return;
   connection.connect();
 });

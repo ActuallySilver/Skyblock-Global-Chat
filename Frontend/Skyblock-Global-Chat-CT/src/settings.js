@@ -21,15 +21,9 @@ class settings {
     constructor() {
         this.initialize(this);
 
-        // Here dependencies could be added 
-        // this.addDependency("Setting1", "Setting2");
-
-
-        // Here category descriptions could be added
         this.setCategoryDescription("General", "General Category description")
 
     }
-
 
     // General settings
     @SwitchProperty({
@@ -39,8 +33,6 @@ class settings {
         subcategory: "Auto-connect"
     })
     enableAutoconnect = true;
-
-    // more settings could be here
 }
 
 export default new settings();

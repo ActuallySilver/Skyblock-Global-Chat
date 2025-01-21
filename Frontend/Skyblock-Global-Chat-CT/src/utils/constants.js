@@ -1,8 +1,3 @@
-//const metadata = JSON.parse(read("Skyblock-Global-Chat", "metadata.json"));
-//
-//export const ModuleVersion = metadata.version;
-//export const ModuleCreator = metadata.creator;
-
 //Colors
 export const BLACK = "§0";
 export const DARK_BLUE = "§1";

@@ -1,7 +1,7 @@
 import WebSocket from "WebSocket";
 import { ChatPrefix, ConsolePrefix, RESET, YELLOW, RED, GREEN } from "./utils/constants";
 
-const WS_URL = "ws://localhost:11000/";
+const GLOBAL_CHAT_WS_URL = "ws://localhost:11000/";
 
 class ServerConnection {
   constructor(url) {
@@ -31,13 +31,14 @@ class ServerConnection {
     this.autoReconnect = true;
   }
 
-  send(jsonString) {
+  send(data) {
     if (!this.socket) {
       ChatLib.chat(`${ChatPrefix} ${RED}Not connected to WebSocket server!${RESET}`);
       return;
     }
 
     try {
+      const jsonString = JSON.stringify(data);
       this.socket.send(jsonString);
     } catch (err) {
       console.error(`${ConsolePrefix} Error while sending: ${err}`);
@@ -100,7 +101,7 @@ class ServerConnection {
   }
 }
 
-export const connection = new ServerConnection(WS_URL);
+export const connection = new ServerConnection(GLOBAL_CHAT_WS_URL);
 
 register("gameUnload", () => {
   connection.close();
