@@ -1,5 +1,12 @@
 import WebSocket from "WebSocket";
-import { ChatPrefix, ConsolePrefix, RESET, YELLOW, RED, GREEN } from "./utils/constants";
+import {
+  ChatPrefix,
+  ConsolePrefix,
+  RESET,
+  YELLOW,
+  RED,
+  GREEN,
+} from "./utils/constants";
 
 const GLOBAL_CHAT_WS_URL = "ws://localhost:11000/";
 
@@ -33,7 +40,9 @@ class ServerConnection {
 
   send(data) {
     if (!this.socket) {
-      ChatLib.chat(`${ChatPrefix} ${RED}Not connected to WebSocket server!${RESET}`);
+      ChatLib.chat(
+        `${ChatPrefix} ${RED}Not connected to WebSocket server!${RESET}`
+      );
       return;
     }
 

@@ -13,7 +13,7 @@ register("command", (...args) => {
 
   const messageData = {
     User: Player.getName(),
-    Text: message
+    Text: message,
   };
   connection.send(JSON.stringify(messageData));
 }).setName("globalchat");
@@ -35,23 +35,37 @@ register("command", (...args) => {
       break;
     case "disconnect":
       connection.close();
-      ChatLib.chat(`${ChatPrefix} ${RED}Disconnected. Auto-reconnect disabled.${RESET}`);
+      ChatLib.chat(
+        `${ChatPrefix} ${RED}Disconnected. Auto-reconnect disabled.${RESET}`
+      );
       break;
     case "toggle":
       globalChatEnabled = !globalChatEnabled;
 
-    const globalChatEnabledStatus = globalChatEnabled ? `${GREEN}Enabled${RESET}` : `${RED}Disabled${RESET}`;
-    ChatLib.chat(`${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${globalChatEnabledStatus}`);
-    break;
+      const globalChatEnabledStatus = globalChatEnabled
+        ? `${GREEN}Enabled${RESET}`
+        : `${RED}Disabled${RESET}`;
+      ChatLib.chat(
+        `${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${globalChatEnabledStatus}`
+      );
+      break;
     case "help":
       ChatLib.chat(`${ChatPrefix}`);
       ChatLib.chat(`${YELLOW}/global connect - Connect to server${RESET}`);
-      ChatLib.chat(`${YELLOW}/global disconnect - Disconnect from server${RESET}`);
-      ChatLib.chat(`${YELLOW}/global toggle - Toggle auto-send to global${RESET}`);
-      ChatLib.chat(`${YELLOW}/globalchat [msg] - Send message to global chat${RESET}`);
+      ChatLib.chat(
+        `${YELLOW}/global disconnect - Disconnect from server${RESET}`
+      );
+      ChatLib.chat(
+        `${YELLOW}/global toggle - Toggle auto-send to global${RESET}`
+      );
+      ChatLib.chat(
+        `${YELLOW}/globalchat [msg] - Send message to global chat${RESET}`
+      );
       break;
     default:
-      ChatLib.chat(`${ChatPrefix} ${RED}Unknown subcommand. Try /global help${RESET}`);
+      ChatLib.chat(
+        `${ChatPrefix} ${RED}Unknown subcommand. Try /global help${RESET}`
+      );
   }
 }).setName("global");
 
@@ -61,7 +75,7 @@ register("messageSent", (message, event) => {
   if (globalChatEnabled) {
     const messageData = {
       User: Player.getName(),
-      Text: message
+      Text: message,
     };
     connection.send(JSON.stringify(messageData));
 
