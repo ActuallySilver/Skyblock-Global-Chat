@@ -39,10 +39,10 @@ register("command", (...args) => {
       break;
     case "toggle":
       globalChatEnabled = !globalChatEnabled;
-      const globalChatEnabledStatus = globalChatEnabled ? `${GREEN}Enabled${RESET}` : `${RED}Disabled${RESET}`;
 
-      ChatLib.chat(`${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${globalChatEnabledStatus}`);
-      break;
+    const globalChatEnabledStatus = globalChatEnabled ? `${GREEN}Enabled${RESET}` : `${RED}Disabled${RESET}`;
+    ChatLib.chat(`${ChatPrefix} ${GOLD}Auto-send to global is now:${RESET} ${globalChatEnabledStatus}`);
+    break;
     case "help":
       ChatLib.chat(`${ChatPrefix}`);
       ChatLib.chat(`${YELLOW}/global connect - Connect to server${RESET}`);
@@ -70,7 +70,6 @@ register("messageSent", (message, event) => {
 });
 
 register("gameLoad", () => {
-  //if (!World.isLoaded()) return;
   if (!settings.enableAutoconnect) return;
   connection.connect();
 });
